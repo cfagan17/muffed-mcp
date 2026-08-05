@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "muffed",
+  "displayName": "Muffed — verified NFL stats",
+  "version": "1.0.0",
+  "description": "Verified NFL statistics and Sleeper league context, callable as tools. Every figure carries the rank its source gave it, its own attribution, and an as-of date. Bundles a skill that teaches the model to quote them correctly.",
+  "author": {
+    "name": "Muffed",
+    "email": "hello@muffed.ai",
+    "url": "https://muffed.ai"
+  },
+  "homepage": "https://muffed.ai/mcp",
+  "repository": "https://github.com/cfagan17/muffed-mcp",
+  "license": "MIT",
+  "keywords": [
+    "nfl",
+    "football",
+    "statistics",
+    "fantasy-football",
+    "sleeper",
+    "nflverse",
+    "verified-data"
+  ]
+}

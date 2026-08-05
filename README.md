@@ -34,10 +34,32 @@ seasons it actually has.
 
 ## Install
 
-**Claude** (web, desktop, mobile) — Settings → Connectors → Add custom connector
-→ paste `https://muffed.ai/api/mcp`. There is no sign-in step.
+**Claude** (web, desktop, mobile) — one click:
 
-**Claude Code**
+[**Add Muffed to Claude**](https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Muffed&connectorUrl=https%3A%2F%2Fmuffed.ai%2Fapi%2Fmcp)
+
+That opens the Add-custom-connector dialog with the name and URL already filled;
+you still review and confirm. By hand: Settings → Connectors → Add custom
+connector → paste `https://muffed.ai/api/mcp`. There is no sign-in step, because
+there is nothing to authorize.
+
+**Claude Code** — install the plugin rather than the bare connector:
+
+```bash
+/plugin marketplace add cfagan17/muffed-mcp
+/plugin install muffed@muffed
+```
+
+The plugin ships the endpoint *and* a skill that teaches the model how to handle
+what comes back: quote the pre-formed verified sentence instead of recomposing
+it, carry the attribution verbatim because the credit line is the licence,
+honour the Half-PPR and charting disclosures, never derive a rank from result
+ordering, and never turn verified context into a start/sit call. A bare
+connector gives a model the data; the plugin also gives it the discipline the
+data was published under. See
+[`skills/muffed-figures/SKILL.md`](skills/muffed-figures/SKILL.md).
+
+Without the plugin:
 
 ```bash
 claude mcp add --transport http muffed https://muffed.ai/api/mcp
@@ -65,7 +87,7 @@ paste the same URL, no authentication.
 |---|---|
 | `get_current_insights` | What Muffed thinks is actually real about the NFL right now — verified, dated, with the evidence |
 | `query_stat_leaders` | League leaders on any verified metric, each with the rank its source gave it |
-| `get_player_metrics` | Every verified figure Muffed holds for one player or team |
+| `get_entity_metrics` | Every verified figure Muffed holds for one player or team |
 | `compare_entities` | Two players or two teams side by side on the metrics both have |
 | `get_metric_definition` | What a metric measures, and which seasons it actually covers |
 | `list_metrics` | Which metrics can be asked about at all — keys and coverage, no figures |
@@ -174,7 +196,21 @@ freshness, and the story layer.
 
 ## About this repository
 
-This repo holds the server's public manifest and documentation. The server
-itself runs as part of muffed.ai, which is closed-source. `server.json` is the
-[MCP Registry](https://registry.modelcontextprotocol.io) manifest; Muffed is
-listed as `ai.muffed/muffed`.
+This repo holds the server's public manifests, the Claude Code plugin, and the
+documentation. The server itself runs as part of muffed.ai, which is
+closed-source — the plugin is a pointer to the hosted endpoint plus the skill,
+not a copy of the server.
+
+```
+.claude-plugin/marketplace.json   the marketplace `/plugin marketplace add` reads
+.claude-plugin/plugin.json        the plugin manifest
+.mcp.json                         the endpoint the plugin installs
+skills/muffed-figures/SKILL.md    how to quote the figures correctly
+server.json                       MCP Registry manifest (`ai.muffed/muffed`)
+```
+
+Two separate listings, often confused: `server.json` is the
+[MCP Registry](https://registry.modelcontextprotocol.io) entry, which is what
+generic MCP clients and directory crawlers read. The `.claude-plugin/` files are
+the Claude Code plugin, which is what `/plugin install` reads. Bumping one does
+not bump the other.
