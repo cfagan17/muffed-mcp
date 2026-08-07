@@ -3,8 +3,12 @@
   "name": "ai.muffed/muffed",
   "title": "Muffed — verified NFL stats and fantasy context",
   "description": "Verified NFL stats and Sleeper league context. Every figure carries its own source rank.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "websiteUrl": "https://muffed.ai",
+  "repository": {
+    "url": "https://github.com/cfagan17/muffed-mcp",
+    "source": "github"
+  },
   "remotes": [
     {
       "type": "streamable-http",
