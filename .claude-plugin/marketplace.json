@@ -13,7 +13,7 @@
       "source": "./",
       "displayName": "Muffed — verified NFL stats",
       "description": "Verified NFL statistics and Sleeper league context, callable as tools. Every figure carries the rank its source gave it, its own attribution, and an as-of date. Bundles a skill that teaches the model to quote them correctly.",
-      "version": "1.0.0",
+      "version": "1.0.3",
       "author": {
         "name": "Muffed",
         "email": "hello@muffed.ai",
