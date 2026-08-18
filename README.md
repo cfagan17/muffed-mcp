@@ -93,6 +93,7 @@ paste the same URL, no authentication.
 | `list_metrics` | Which metrics can be asked about at all — keys and coverage, no figures |
 | `verify_claim` | Checks a stated figure against the verified panel and returns the real one if it disagrees |
 | `get_backfield` | Who backs up a starting running back — and in-season, who replaces an injured one |
+| `run_stat_query` | A figure computed on request — qualified superlatives, multi-season streaks, derived rates — returned with its method, population and data version, and labelled computed rather than verified |
 | `sleeper_find_leagues` | Your Sleeper leagues, from your username |
 | `sleeper_get_league` | Your league's setup — teams, scoring format, roster slots, managers |
 | `sleeper_matchup_preview` | Verified context on both sides of a matchup |
