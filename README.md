@@ -207,6 +207,7 @@ not a copy of the server.
 .mcp.json                         the endpoint the plugin installs
 skills/muffed-figures/SKILL.md    how to quote the figures correctly
 server.json                       MCP Registry manifest (`ai.muffed/muffed`)
+glama.json                        maintainer declaration for the Glama listing
 ```
 
 Two separate listings, often confused: `server.json` is the
@@ -214,3 +215,13 @@ Two separate listings, often confused: `server.json` is the
 generic MCP clients and directory crawlers read. The `.claude-plugin/` files are
 the Claude Code plugin, which is what `/plugin install` reads. Bumping one does
 not bump the other.
+
+
+## Listed on
+
+[![muffed-mcp MCP server](https://glama.ai/mcp/servers/cfagan17/muffed-mcp/badges/score.svg)](https://glama.ai/mcp/servers/cfagan17/muffed-mcp)
+
+- [MCP Registry](https://registry.modelcontextprotocol.io) — `ai.muffed/muffed`
+- - [Glama](https://glama.ai/mcp/servers/cfagan17/muffed-mcp)
+  - - [mcpservers.org](https://mcpservers.org)
+    - 
