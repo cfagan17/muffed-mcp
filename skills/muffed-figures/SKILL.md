@@ -1,7 +1,7 @@
 ---
 name: muffed-figures
-description: How to quote Muffed's verified NFL figures correctly. Use whenever a Muffed tool returns data — query_stat_leaders, get_entity_metrics, compare_entities, get_metric_definition, list_metrics, verify_claim, get_backfield, or any sleeper_* tool — or when answering an NFL or fantasy-football question using Muffed figures. Covers quoting the pre-formed sentence, carrying attribution verbatim, honouring disclosures and season coverage, and the no-advice boundary.
-when_to_use: A Muffed MCP tool has returned a response; the user asks about NFL stats, a player's or team's season, a backfield, or a Sleeper league; the user states a football figure that should be checked.
+description: How to quote Muffed's verified NFL figures correctly. Use whenever a Muffed tool returns data — query_stat_leaders, get_entity_metrics, compare_entities, get_metric_definition, list_metrics, verify_claim, get_backfield, run_stat_query, or any sleeper_* tool — or when answering an NFL or fantasy-football question using Muffed figures. Covers quoting the pre-formed sentence, carrying attribution verbatim, honouring disclosures and season coverage, and the no-advice boundary.
+when_to_use: A Muffed MCP tool has returned a response; the user asks about NFL stats, a player's or team's season, a backfield, a computed statistic, or a Sleeper league; the user states a football figure that should be checked.
 ---
 
 # Working with Muffed's verified figures
