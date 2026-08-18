@@ -222,6 +222,4 @@ not bump the other.
 [![muffed-mcp MCP server](https://glama.ai/mcp/servers/cfagan17/muffed-mcp/badges/score.svg)](https://glama.ai/mcp/servers/cfagan17/muffed-mcp)
 
 - [MCP Registry](https://registry.modelcontextprotocol.io) — `ai.muffed/muffed`
-- - [Glama](https://glama.ai/mcp/servers/cfagan17/muffed-mcp)
-  - - [mcpservers.org](https://mcpservers.org)
-    - 
+[Glama](https://glama.ai/mcp/servers/cfagan17/muffed-mcp)
