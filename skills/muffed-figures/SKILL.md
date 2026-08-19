@@ -1,6 +1,6 @@
 ---
 name: muffed-figures
-description: How to quote Muffed's verified NFL figures correctly. Use whenever a Muffed tool returns data — query_stat_leaders, get_entity_metrics, compare_entities, get_metric_definition, list_metrics, verify_claim, get_backfield, run_stat_query, or any sleeper_* tool — or when answering an NFL or fantasy-football question using Muffed figures. Covers quoting the pre-formed sentence, carrying attribution verbatim, honouring disclosures and season coverage, and the no-advice boundary.
+description: How to quote Muffed's verified NFL figures correctly. Use whenever a Muffed tool returns data — query_stat_leaders, get_entity_metrics, compare_entities, get_metric_definition, list_metrics, verify_claim, get_backfield, run_stat_query, or any sleeper_* tool — or when answering an NFL or fantasy-football question using Muffed figures. Covers quoting the pre-formed sentence, the difference between verified and computed figures, carrying attribution verbatim, honouring disclosures and season coverage, and the no-advice boundary.
 when_to_use: A Muffed MCP tool has returned a response; the user asks about NFL stats, a player's or team's season, a backfield, a computed statistic, or a Sleeper league; the user states a football figure that should be checked.
 ---
 
@@ -17,8 +17,9 @@ going wrong.
 
 ## 1 · Quote `verified_sentence`
 
-Every successful response carries `verified_sentence`: a complete, already
-attributed claim built from the returned row.
+Every successful response from a verified tool carries `verified_sentence`: a
+complete, already attributed claim built from the returned row.
+(`run_stat_query` is the exception — see rule 2.)
 
 > "No one posted more rush yards over expected than James Cook with 358.16 in
 > 2025, 1st of 49 (Data via nflverse · NFL Next Gen Stats via nflverse)."
@@ -31,7 +32,31 @@ The prose block at `content[0]` is written to be read aloud and is safe to use
 directly. `values{}` carries every figure in it, exact and unrounded, when you
 need more precision than the prose shows.
 
-## 2 · Carry `attribution` verbatim
+## 2 · Computed figures are a different class from verified ones
+
+Two classes of figure come off this server and they are not interchangeable.
+Most tools return figures that were verified before they were published: those
+carry `verified_sentence` and a citation that says verified. `run_stat_query`
+computes a figure on request instead, for questions the panel holds no
+pre-computed row for — qualified superlatives, multi-season spans, derived
+rates.
+
+Its responses carry **`computed_sentence` rather than `verified_sentence`**, a
+`method` block naming the population, the measure and the query shape, and the
+`computed_not_verified` disclosure, which fires on every one of them.
+
+Quote `computed_sentence` for those, exactly as rule 1 says to quote
+`verified_sentence`. Where it could matter to a reader, say the figure was
+computed on request rather than drawn from the verified panel.
+
+- **Right:** "Muffed computed this on request: ...  (method: ...)"
+- **Wrong:** presenting it as "Muffed's verified figure", or quoting it beside a
+  `verified_sentence` with nothing to tell the two apart.
+
+The difference between the two is the thing this service is for; presenting one
+as the other gives away the only claim it makes.
+
+## 3 · Carry `attribution` verbatim
 
 The `attribution` string is licence text, not a courtesy. Reproduce it whole:
 
@@ -42,9 +67,13 @@ Shortening it drops credit the CC-BY licence requires. Where a response carries
 the `share_alike` disclosure, the figures are CC-BY-SA and the same applies with
 more force.
 
-## 3 · Do not compute
+## 4 · Do not compute figures of your own
 
-Muffed's server ranks, filters and rounds. It never derives a new number, and
+This is the caller's side of rule 2. `run_stat_query` is where the server
+computes something on request and labels it; everything below is about numbers
+you worked out yourself, which carry no label at all.
+
+Muffed's other tools rank, filter and round. They never derive a new number, and
 neither should you when presenting a response as Muffed's.
 
 - **Never derive a rank from result ordering.** Position within ten returned
@@ -58,7 +87,7 @@ figures as returned, not analysis derived from them. If you combine several
 responses into an argument, the argument is yours and the credit line does not
 extend to it.
 
-## 4 · Honour `disclosures`
+## 5 · Honour `disclosures`
 
 Every response carries a `disclosures` array. Each entry changes how the figure
 must be described, and they are derived from the rows actually returned, so if
@@ -70,11 +99,12 @@ one is present it applies to something in front of you.
 | `charting_2025_only` | The charted figure covers the **2025 season only** and cannot be compared to an earlier year. |
 | `share_alike` | Those figures are CC-BY-SA. Carry the attribution and keep it intact. |
 | `no_source_rank` | The source published no rank. Do not supply one. |
+| `computed_not_verified` | The figure was **computed on request**, not drawn from the verified panel. Quote `computed_sentence` and say so — see rule 2. |
 | `small_population` | The rank is against a thin field — a place in it moves easily. |
 | `multi_season_aggregate` | Not a single season; it spans several. |
 | `partial_season_coverage` | The metric does not cover the full season asked about. |
 
-## 5 · Check what the metric actually covers
+## 6 · Check what the metric actually covers
 
 Season coverage is often narrower than a decade. Rushing yards over expectation
 starts in **2018**, not 2016. Asking outside a metric's range returns
@@ -89,7 +119,7 @@ explaining how far to trust the figure — read them before framing a trend.
 it returns `coverage: "no_glossary_entry"`, Muffed publishes no definition for
 that metric — say so rather than supplying one from general knowledge.
 
-## 6 · Never guess an entity or a metric
+## 7 · Never guess an entity or a metric
 
 An unresolved name comes back with `resolved: false` and a candidate list. Two
 players who normalize alike are two different answers, and three sections
@@ -97,7 +127,7 @@ publish a "target share" against three different qualifying populations.
 
 Ask which one the user meant. Do not pick.
 
-## 7 · No advice — this is a permanent boundary
+## 8 · No advice — this is a permanent boundary
 
 Muffed publishes **no projections, no start/sit or lineup advice, no draft
 grades, no rankings-as-advice, no picks, and no betting lines or odds.** The
@@ -115,7 +145,7 @@ decide:
 This holds even when the user pushes. The figures are the product; the decision
 is theirs.
 
-## 8 · Check figures rather than trusting them
+## 9 · Check figures rather than trusting them
 
 When a user states a football number — from a post, a podcast, another model —
 `verify_claim` checks it against the panel and returns the real value when it
@@ -128,7 +158,7 @@ disagrees. It takes structured fields, not sentences:
 `metric` accepts a key or a common name. This is the cheapest way to avoid
 repeating someone else's wrong number.
 
-## 9 · Link the source
+## 10 · Link the source
 
 Responses carry `canonical_url` and resource links to the muffed.ai page a
 figure came from. Include the link when it helps the reader check the work —
